@@ -18,7 +18,10 @@ const (
 	errLensRuntimeNotSupported string = "the selected lens runtime is not supported by this build"
 )
 
-var ErrLensRuntimeNotSupported = errors.New(errLensRuntimeNotSupported)
+var (
+	ErrKeyringMissingForSourceHubACP = errors.New("a keyring must be provided for SourceHub ACP")
+	ErrLensRuntimeNotSupported       = errors.New(errLensRuntimeNotSupported)
+)
 
 func NewErrLensRuntimeNotSupported(lens LensRuntimeType) error {
 	return errors.New(errLensRuntimeNotSupported, errors.NewKV("Lens", lens))

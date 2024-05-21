@@ -13,9 +13,10 @@ package acp
 import (
 	"context"
 
+	"github.com/sourcenetwork/corelog"
 	"github.com/sourcenetwork/immutable"
 
-	"github.com/sourcenetwork/corelog"
+	"github.com/sourcenetwork/defradb/acp/identity"
 )
 
 var (
@@ -68,7 +69,7 @@ type ACP interface {
 	// - actorID here is the identity of the actor registering the document object.
 	RegisterDocObject(
 		ctx context.Context,
-		actorID string,
+		indentity identity.Identity,
 		policyID string,
 		resourceName string,
 		docID string,

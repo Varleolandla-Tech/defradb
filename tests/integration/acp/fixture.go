@@ -12,6 +12,7 @@ package test_acp
 
 import (
 	"encoding/hex"
+	"time"
 
 	"github.com/decred/dcrd/dcrec/secp256k1/v4"
 	"github.com/sourcenetwork/immutable"
@@ -31,9 +32,14 @@ func MustParseIdentity(privateKeyHex string) immutable.Option[acpIdentity.Identi
 		panic(err)
 	}
 	privateKey := secp256k1.PrivKeyFromBytes(privateKeyBytes)
-	identity, err := acpIdentity.FromPrivateKey(privateKey)
+	identity, err := acpIdentity.FromPrivateKey(
+		privateKey,
+		15*time.Minute,
+		immutable.Some("todo"),
+		immutable.Some("todo"),
+	)
 	if err != nil {
 		panic(err)
 	}
-	return identity
+	return immutable.Some(identity)
 }

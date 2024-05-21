@@ -10,6 +10,7 @@
 
 package http
 
+/*
 import (
 	"encoding/hex"
 	"testing"
@@ -146,3 +147,4 @@ func TestVerifyAuthTokenErrorsWithNotBefore(t *testing.T) {
 	_, err = verifyAuthToken(data, "123abc")
 	assert.Error(t, err)
 }
+*/

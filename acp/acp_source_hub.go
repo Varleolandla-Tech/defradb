@@ -14,6 +14,7 @@ import (
 	"context"
 
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
+	cosmosTypes "github.com/cosmos/cosmos-sdk/types"
 	protoTypes "github.com/cosmos/gogoproto/types"
 	"github.com/sourcenetwork/immutable"
 	"github.com/sourcenetwork/sourcehub/sdk"
@@ -83,6 +84,12 @@ func (a *acpSourceHub) AddPolicy(
 	signer := sdk.TxSignerFromCosmosKey(&secp256k1.PrivKey{
 		Key: adminKey,
 	})
+
+	k := secp256k1.PubKey{
+		Key: []byte(creatorID),
+	}
+
+	creatorID = cosmosTypes.AccAddress(k.Address().Bytes()).String()
 
 	msgSet := sdk.MsgSet{}
 	policyMapper := msgSet.WithCreatePolicy(

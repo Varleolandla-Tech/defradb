@@ -47,6 +47,8 @@ var (
 )
 
 func init() {
+	acpType = sourceHubACPType
+	return
 	acpType = ACPType(os.Getenv(acpTypeEnvName))
 	if acpType == "" {
 		acpType = localACPType

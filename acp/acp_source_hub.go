@@ -71,7 +71,7 @@ func (a *acpSourceHub) Start(ctx context.Context) error {
 
 func (a *acpSourceHub) AddPolicy(
 	ctx context.Context,
-	creatorID string,
+	creator identity.Identity,
 	policy string,
 	policyMarshalType policyMarshalType,
 	creationTime *protoTypes.Timestamp,
@@ -86,14 +86,14 @@ func (a *acpSourceHub) AddPolicy(
 	})
 
 	k := secp256k1.PubKey{
-		Key: []byte(creatorID),
+		Key: creator.PublicKey.SerializeCompressed(),
 	}
 
-	creatorID = cosmosTypes.AccAddress(k.Address().Bytes()).String()
+	_ = cosmosTypes.AccAddress(k.Address().Bytes()).String()
 
 	msgSet := sdk.MsgSet{}
 	policyMapper := msgSet.WithCreatePolicy(
-		acptypes.NewMsgCreatePolicyNow(creatorID, policy, acptypes.PolicyMarshalingType(policyMarshalType)),
+		acptypes.NewMsgCreatePolicyNow(signer.GetAccAddress(), policy, acptypes.PolicyMarshalingType(policyMarshalType)),
 	)
 	tx, err := a.txBuilder.Build(ctx, signer, &msgSet)
 	if err != nil {

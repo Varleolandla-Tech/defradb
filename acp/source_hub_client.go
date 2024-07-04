@@ -42,7 +42,7 @@ type sourceHubClient interface {
 	// otherwise returns error.
 	AddPolicy(
 		ctx context.Context,
-		creatorID string,
+		creator identity.Identity,
 		policy string,
 		marshalType policyMarshalType,
 		creationTime *protoTypes.Timestamp,
@@ -128,9 +128,9 @@ func (a *sourceHubBridge) Start(ctx context.Context) error {
 	return a.client.Start(ctx)
 }
 
-func (a *sourceHubBridge) AddPolicy(ctx context.Context, creatorID string, policy string) (string, error) {
+func (a *sourceHubBridge) AddPolicy(ctx context.Context, creator identity.Identity, policy string) (string, error) {
 	// Having a creator identity is a MUST requirement for adding a policy.
-	if creatorID == "" {
+	if creator.DID == "" {
 		return "", ErrPolicyCreatorMustNotBeEmpty
 	}
 
@@ -145,14 +145,14 @@ func (a *sourceHubBridge) AddPolicy(ctx context.Context, creatorID string, polic
 
 	policyID, err := a.client.AddPolicy(
 		ctx,
-		creatorID,
+		creator,
 		policy,
 		marshalType,
 		protoTypes.TimestampNow(),
 	)
 
 	if err != nil {
-		return "", NewErrFailedToAddPolicyWithACP(err, "Local", creatorID)
+		return "", NewErrFailedToAddPolicyWithACP(err, "Local", creator.DID)
 	}
 
 	log.InfoContext(ctx, "Created Policy", corelog.Any("PolicyID", policyID))

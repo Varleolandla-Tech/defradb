@@ -92,7 +92,7 @@ func Test_LocalACP_InMemory_AddPolicy_CreatingSamePolicyAfterWipeReturnsSameID(t
 
 	policyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -114,7 +114,7 @@ func Test_LocalACP_InMemory_AddPolicy_CreatingSamePolicyAfterWipeReturnsSameID(t
 
 	policyID, errAddPolicy = localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -141,7 +141,7 @@ func Test_LocalACP_PersistentMemory_AddPolicy_CreatingSamePolicyReturnsDifferent
 
 	policyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -163,7 +163,7 @@ func Test_LocalACP_PersistentMemory_AddPolicy_CreatingSamePolicyReturnsDifferent
 	// Should generate a different ID for the new policy, even though the payload is the same
 	newPolicyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.NoError(t, errAddPolicy)
@@ -183,7 +183,7 @@ func Test_LocalACP_InMemory_ValidateResourseExistsOrNot_ErrIfDoesntExist(t *test
 
 	policyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -233,7 +233,7 @@ func Test_LocalACP_PersistentMemory_ValidateResourseExistsOrNot_ErrIfDoesntExist
 
 	policyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -296,7 +296,7 @@ func Test_LocalACP_InMemory_IsDocRegistered_TrueIfRegisteredFalseIfNotAndErrorOt
 
 	policyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -376,7 +376,7 @@ func Test_LocalACP_PersistentMemory_IsDocRegistered_TrueIfRegisteredFalseIfNotAn
 
 	policyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -472,7 +472,7 @@ func Test_LocalACP_InMemory_CheckDocAccess_TrueIfHaveAccessFalseIfNotErrorOtherw
 
 	policyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -558,7 +558,7 @@ func Test_LocalACP_PersistentMemory_CheckDocAccess_TrueIfHaveAccessFalseIfNotErr
 
 	policyID, errAddPolicy := localACP.AddPolicy(
 		ctx,
-		identity1.DID,
+		identity1,
 		validPolicy,
 	)
 	require.Nil(t, errAddPolicy)
@@ -673,7 +673,7 @@ func Test_LocalACP_InMemory_AddPolicy_InvalidCreatorIDReturnsError(t *testing.T)
 
 	policyID, err := localACP.AddPolicy(
 		ctx,
-		invalidIdentity.DID,
+		invalidIdentity,
 		validPolicy,
 	)
 
@@ -719,7 +719,7 @@ func Test_LocalACP_Persistent_AddPolicy_InvalidCreatorIDReturnsError(t *testing.
 
 	policyID, err := localACP.AddPolicy(
 		ctx,
-		invalidIdentity.DID,
+		invalidIdentity,
 		validPolicy,
 	)
 

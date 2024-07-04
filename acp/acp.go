@@ -48,7 +48,7 @@ type ACP interface {
 	// otherwise returns error.
 	//
 	// A policy can not be added without a creator identity (sourcehub address).
-	AddPolicy(ctx context.Context, creatorID string, policy string) (string, error)
+	AddPolicy(ctx context.Context, creator identity.Identity, policy string) (string, error)
 
 	// ValidateResourceExistsOnValidDPI performs DPI validation of the resource (matching resource name)
 	// that is on the policy (matching policyID), returns an error upon validation failure.

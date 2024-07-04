@@ -19,6 +19,7 @@ import (
 	"github.com/sourcenetwork/acp_core/pkg/engine"
 	"github.com/sourcenetwork/acp_core/pkg/runtime"
 	"github.com/sourcenetwork/acp_core/pkg/types"
+	"github.com/sourcenetwork/defradb/acp/identity"
 	"github.com/sourcenetwork/immutable"
 )
 
@@ -105,14 +106,14 @@ func (l *ACPLocal) Close() error {
 
 func (l *ACPLocal) AddPolicy(
 	ctx context.Context,
-	creatorID string,
+	creator identity.Identity,
 	policy string,
 	marshalType policyMarshalType,
 	creationTime *protoTypes.Timestamp,
 ) (string, error) {
-	principal, err := auth.NewDIDPrincipal(creatorID)
+	principal, err := auth.NewDIDPrincipal(creator.DID)
 	if err != nil {
-		return "", newErrInvalidActorID(err, creatorID)
+		return "", newErrInvalidActorID(err, creator.DID)
 	}
 	ctx = auth.InjectPrincipal(ctx, principal)
 
@@ -152,15 +153,15 @@ func (l *ACPLocal) Policy(
 
 func (l *ACPLocal) RegisterObject(
 	ctx context.Context,
-	actorID string,
+	identity identity.Identity,
 	policyID string,
 	resourceName string,
 	objectID string,
 	creationTime *protoTypes.Timestamp,
 ) (RegistrationResult, error) {
-	principal, err := auth.NewDIDPrincipal(actorID)
+	principal, err := auth.NewDIDPrincipal(identity.DID)
 	if err != nil {
-		return RegistrationResult_NoOp, newErrInvalidActorID(err, actorID)
+		return RegistrationResult_NoOp, newErrInvalidActorID(err, identity.DID)
 	}
 
 	ctx = auth.InjectPrincipal(ctx, principal)

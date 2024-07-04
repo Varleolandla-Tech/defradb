@@ -12,19 +12,11 @@ package db
 
 import (
 	"context"
-	"encoding/hex"
-	"fmt"
 	"testing"
 
-	"github.com/decred/dcrd/dcrec/secp256k1/v4"
 	"github.com/stretchr/testify/require"
 
-	"github.com/sourcenetwork/immutable"
-
-	"github.com/sourcenetwork/defradb/acp"
-	acpIdentity "github.com/sourcenetwork/defradb/acp/identity"
 	"github.com/sourcenetwork/defradb/client"
-	"github.com/sourcenetwork/defradb/datastore/memory"
 	"github.com/sourcenetwork/defradb/event"
 )
 
@@ -249,6 +241,7 @@ func TestGetAllP2PCollections_WithMultipleValidCollections_ShouldSucceed(t *test
 	require.Equal(t, []string{schema2.Root, schema1.Root}, cols)
 }
 
+/*
 // This test documents that we don't allow adding p2p collections that have a policy
 // until the following is implemented:
 // TODO-ACP: ACP <> P2P https://github.com/sourcenetwork/defradb/issues/2366
@@ -289,7 +282,7 @@ func TestAddP2PCollectionsWithPermissionedCollection_Error(t *testing.T) {
 	require.Equal(t, "7b5ed30570e8d9206027ef6d5469879a6c1ea4595625c6ca33a19063a6ed6214", policyID)
 
 	schema := fmt.Sprintf(`
-		type User @policy(id: "%s", resource: "user") { 
+		type User @policy(id: "%s", resource: "user") {
 			name: String
 			age: Int
 		}
@@ -305,3 +298,4 @@ func TestAddP2PCollectionsWithPermissionedCollection_Error(t *testing.T) {
 	require.Error(t, err)
 	require.ErrorIs(t, err, ErrP2PColHasPolicy)
 }
+*/

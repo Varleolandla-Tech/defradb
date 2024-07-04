@@ -46,7 +46,7 @@ require (
 	github.com/sourcenetwork/go-libp2p-pubsub-rpc v0.0.14
 	github.com/sourcenetwork/graphql-go v0.7.10-0.20231113214537-a9560c1898dd
 	github.com/sourcenetwork/immutable v0.3.0
-	github.com/sourcenetwork/sourcehub v0.2.1-0.20240619181822-0d8ca4aaa5de
+	github.com/sourcenetwork/sourcehub v0.2.1-0.20240704171910-96e9d3f95617
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.19.0
